@@ -1,0 +1,11 @@
+25 lines per functions
+no for
+functions authorize:
+open, close, read, write,
+printf, malloc, free, perror,
+strerror, exit, gettimeofday.
+All functions of the math
+library (-lm man man 3 math).
+all functions in libft
+You need to use clean code an abstraction level
+++i for increment;
