@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/21 10:22:29 by linux             #+#    #+#             */
+/*   Updated: 2025/07/21 10:29:14 by linux            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSE_H
 # define PARSE_H
 
@@ -5,6 +17,16 @@
 # include "libft.h"
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdio.h>
+
+# define EXIT_FAILURE 1
+# define BUFFER_SIZE 1024
+
+typedef enum e_state_parsing
+{
+	PARSING_FAILURE = -1,
+	PARSING_SUCCESS
+}	t_state_parsing;
 
 void	parse_file(const char *file, t_config *config);
 char	*file_to_string(const char *path);

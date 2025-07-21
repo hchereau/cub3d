@@ -1,8 +1,19 @@
-#include "parse.h"
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/21 10:20:33 by linux             #+#    #+#             */
+/*   Updated: 2025/07/21 10:22:35 by linux            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void    parse_error(const char *msg)
+#include "parse.h"
+
+void	parse_error(const char *msg)
 {
-    printf("Error\n%s\n", msg);
-    exit(1);
+	printf("Error\n%s\n", msg);
+	exit(EXIT_FAILURE);
 }
