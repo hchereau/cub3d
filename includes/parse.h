@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 10:22:29 by linux             #+#    #+#             */
-/*   Updated: 2025/07/21 10:29:14 by linux            ###   ########.fr       */
+/*   Updated: 2025/07/21 10:41:08 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 
 # define EXIT_FAILURE 1
-# define BUFFER_SIZE 1024
+# define BUFFER_SIZE_PARSING_CUBE 1024
 
 typedef enum e_state_parsing
 {

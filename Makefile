@@ -1,40 +1,86 @@
 .RECIPEPREFIX = >
 NAME = cub3D
-CC = clang
-CFLAGS = -Wall -Wextra -Werror
-SRCS = \
- srcs/main.c \
- srcs/parse/parse.c \
- srcs/parse/file_reader.c \
- srcs/parse/parse_utils.c \
- srcs/parse/texture.c \
- srcs/parse/color.c \
- srcs/parse/map.c \
- srcs/parse/validate_map.c \
- srcs/parse/error.c
-OBJS = $(SRCS:%.c=objs/%.o)
-LIBFT = libft/libft.a
-INCLUDES = -I includes -I libft/includes
+
+### LIBFT #####################################################################
+
+PATH_LIBFT := libft/
+
+LIBFT := $(PATH_LIBFT)libft.a
+
+### SRCS #######################################################################
+
+PATH_SRCS += srcs/
+PATH_SRCS += srcs/parse/
+
+SRCS += main.c
+
+# srcs/parse/
+
+SRCS += parse.c
+SRCS += file_reader.c
+SRCS += parse_utils.c
+SRCS += texture.c
+SRCS += color.c
+SRCS += map.c
+SRCS += validate_map.c
+SRCS += error.c
+
+vpath %.c $(PATH_SRCS)
+
+### OBJS #######################################################################
+
+PATH_OBJS := objs/
+
+OBJS := $(patsubst %.c, $(PATH_OBJS)%.o, $(SRCS))
+
+### HEADERS ####################################################################
+
+PATH_INCLUDES := includes/
+PATH_INCLUDES_LIBFT := $(PATH_LIBFT)/includes/
+
+### COMPILATION ################################################################
+
+CC := clang
+
+CFLAGS += -Wall
+CFLAGS += -Wextra
+CFLAGS += -Werror
+
+### COLORS #####################################################################
+
+GREEN := \033[0;32m
+BLUE := \033[0;34m
+WHITE := \033[0;37m
+
+### RULE #######################################################################
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-> $(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(INCLUDES)
+> @echo "$(BLUE)Compiling $(NAME)...$(WHITE)"
+> @$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) -I $(PATH_INCLUDES) -I $(PATH_INCLUDES_LIBFT)
+> @echo "$(GREEN)$(NAME) Compiled !$(WHITE)"
 
-objs/%.o: %.c
-> mkdir -p $(dir $@)
-> $(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+$(OBJS): $(PATH_OBJS)%.o: %.c
+> @mkdir -p $(dir $@)
+> @$(CC) $(CFLAGS) -c $< -o $@ -I $(PATH_INCLUDES) -I $(PATH_INCLUDES_LIBFT)
 
 $(LIBFT):
-> $(MAKE) -C libft
+> @echo "$(BLUE)Compiling $(LIBFT) ...$(WHITE)"
+> @$(MAKE) -sC $(PATH_LIBFT)
+> @echo "$(GREEN)$(LIBFT) Compiled ! $(WHITE)"
 
 clean:
-> rm -rf objs
-> $(MAKE) -C libft clean
+> @echo "$(BLUE)Cleaning $(NAME) ...$(WHITE)"
+> @$(RM) -r objs
+> @$(MAKE) -sC libft clean
+> @echo "$(GREEN)$(NAME) Cleaned ! $(WHITE)"
 
 fclean: clean
-> rm -f $(NAME)
-> $(MAKE) -C libft fclean
+> @echo "$(BLUE)Full Cleaning $(NAME) ...$(WHITE)"
+> @$(RM) $(NAME)
+> @$(MAKE) -sC $(PATH_LIBFT) fclean
+> @echo "$(GREEN)$(NAME) Fully Cleaned ! $(WHITE)"
 
 re: fclean all
 
