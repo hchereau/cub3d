@@ -9,3 +9,5 @@ library (-lm man man 3 math).
 all functions in libft
 You need to use clean code an abstraction level
 ++i for increment;
+use norminette for see if you code is right norm (except for minilibx folder)
+
