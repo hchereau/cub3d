@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/21 10:38:50 by linux             #+#    #+#             */
-/*   Updated: 2025/07/21 10:42:10 by linux            ###   ########.fr       */
+/*   Created: 2025/07/21 10:35:13 by linux             #+#    #+#             */
+/*   Updated: 2025/07/21 10:36:15 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int	main(int argc, char **argv)
+t_state_parsing	parse_texture(char *line, char **store)
 {
-	t_config	cfg;
-
-	(void)argc;
-	ft_memset(&cfg, 0, sizeof(cfg));
-	if (!argv[1])
-		return (printf("Error\nNo file\n"), 1);
-	parse_file(argv[1], &cfg);
-	printf("Loaded map %dx%d\n", cfg.map.width, cfg.map.height);
-	return (0);
+	while (*line && *line != ' ')
+		line++;
+	while (*line == ' ')
+		line++;
+	if (*store)
+		return (PARSING_FAILURE);
+	*store = ft_strdup(line);
+	if (!*store)
+		return (PARSING_FAILURE);
+	return (PARSING_SUCCESS);
 }

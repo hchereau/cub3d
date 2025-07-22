@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 09:40:59 by linux             #+#    #+#             */
-/*   Updated: 2025/07/19 09:51:11 by linux            ###   ########.fr       */
+/*   Updated: 2025/07/21 10:39:34 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,5 @@ typedef struct s_config
 	t_map		map;
 	t_player	player;
 }	t_config;
-
 
 #endif

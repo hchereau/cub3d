@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map_information.c                              :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/16 09:30:29 by linux             #+#    #+#             */
-/*   Updated: 2025/07/19 09:30:27 by linux            ###   ########.fr       */
+/*   Created: 2025/07/21 10:20:33 by linux             #+#    #+#             */
+/*   Updated: 2025/07/21 10:22:35 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "parse.h"
 
-/*this function use */
-
-get_map_information(char *map_file)
+void	parse_error(const char *msg)
 {
-
+	printf("Error\n%s\n", msg);
+	exit(EXIT_FAILURE);
 }
