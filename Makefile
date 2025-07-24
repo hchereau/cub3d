@@ -7,6 +7,11 @@ PATH_LIBFT := libft/
 
 LIBFT := $(PATH_LIBFT)libft.a
 
+### MINILIBX ###################################################################
+
+MINILIBX_FOLDER := minilibx-linux/
+LIB_MLX := $(MINILIBX_FOLDER)/libmlx.a
+
 ### SRCS #######################################################################
 
 PATH_SRCS += srcs/
@@ -37,6 +42,7 @@ OBJS := $(patsubst %.c, $(PATH_OBJS)%.o, $(SRCS))
 
 PATH_INCLUDES := includes/
 PATH_INCLUDES_LIBFT := $(PATH_LIBFT)/includes/
+PATH_INCLUDES_MLX := $(MINILIBX_FOLDER)/
 
 ### COMPILATION ################################################################
 
@@ -45,6 +51,16 @@ CC := clang
 CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
+
+### LINKING ####################################################################
+
+LINKS += -Lmlx-linux
+LINKS += -L/usr/lib
+LINKS += -lXext
+LINKS += -lX11
+LINKS += -lm
+LINKS += -lz
+LINKS += -fPIE
 
 ### COLORS #####################################################################
 
@@ -58,12 +74,12 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
 > @echo "$(BLUE)Compiling $(NAME)...$(WHITE)"
-> @$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) -I $(PATH_INCLUDES) -I $(PATH_INCLUDES_LIBFT)
+> @$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) -I $(PATH_INCLUDES) -I $(PATH_INCLUDES_LIBFT) -I $(MINILIBX_FOLDER)
 > @echo "$(GREEN)$(NAME) Compiled !$(WHITE)"
 
 $(OBJS): $(PATH_OBJS)%.o: %.c
 > @mkdir -p $(dir $@)
-> @$(CC) $(CFLAGS) -c $< -o $@ -I $(PATH_INCLUDES) -I $(PATH_INCLUDES_LIBFT)
+> @$(CC) $(CFLAGS) -c $< -o $@ -I $(PATH_INCLUDES) -I $(PATH_INCLUDES_LIBFT) -I $(MINILIBX_FOLDER)
 
 $(LIBFT):
 > @echo "$(BLUE)Compiling $(LIBFT) ...$(WHITE)"
