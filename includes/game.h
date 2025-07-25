@@ -6,12 +6,14 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 10:27:34 by linux             #+#    #+#             */
-/*   Updated: 2025/07/24 10:47:34 by linux            ###   ########.fr       */
+/*   Updated: 2025/07/25 09:37:12 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
+
 # include "mlx.h"
+# include "cub3d.h"
 
 #endif
