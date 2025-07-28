@@ -16,6 +16,7 @@ LIB_MLX := $(MINILIBX_FOLDER)/libmlx.a
 
 PATH_SRCS += srcs/
 PATH_SRCS += srcs/parse/
+PATH_SRCS += srcs/exec/
 
 SRCS += main.c
 
@@ -29,6 +30,7 @@ SRCS += color.c
 SRCS += map.c
 SRCS += validate_map.c
 SRCS += error.c
+SRCS += exec_game.c
 
 vpath %.c $(PATH_SRCS)
 
@@ -46,7 +48,7 @@ PATH_INCLUDES_MLX := $(MINILIBX_FOLDER)/
 
 ### COMPILATION ################################################################
 
-CC := clang
+CC := gcc
 
 CFLAGS += -Wall
 CFLAGS += -Wextra
@@ -74,7 +76,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
 > @echo "$(BLUE)Compiling $(NAME)...$(WHITE)"
-> @$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) -I $(PATH_INCLUDES) -I $(PATH_INCLUDES_LIBFT) -I $(MINILIBX_FOLDER)
+> @$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(MINILIBX_FOLDER)/libmlx.a $(LINKS) -I $(PATH_INCLUDES) -I $(PATH_INCLUDES_LIBFT) -I $(MINILIBX_FOLDER)
 > @echo "$(GREEN)$(NAME) Compiled !$(WHITE)"
 
 $(OBJS): $(PATH_OBJS)%.o: %.c

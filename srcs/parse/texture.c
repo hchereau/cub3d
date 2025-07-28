@@ -12,16 +12,16 @@
 
 #include "parse.h"
 
-t_state_parsing	parse_texture(char *line, char **store)
+int	parse_texture(char *line, char **store)
 {
 	while (*line && *line != ' ')
 		line++;
 	while (*line == ' ')
 		line++;
 	if (*store)
-		return (PARSING_FAILURE);
+		return (-1);
 	*store = ft_strdup(line);
 	if (!*store)
-		return (PARSING_FAILURE);
-	return (PARSING_SUCCESS);
+		return (-1);
+	return (0);
 }

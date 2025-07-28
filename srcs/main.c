@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 #include "parse.h"
+#include "game.h"
 
 int	main(int argc, char **argv)
 {

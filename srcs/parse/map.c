@@ -53,7 +53,7 @@ static void	fill_map_grid(t_config *cfg, char **lines, int start)
 	}
 }
 
-t_state_parsing	parse_map(char **lines, int start, t_config *cfg)
+ int	parse_map(char **lines, int start, t_config *cfg)
 {
 	int	i;
 
@@ -71,10 +71,10 @@ t_state_parsing	parse_map(char **lines, int start, t_config *cfg)
 		i++;
 	}
 	if (cfg->map.height == 0)
-		return (PARSING_FAILURE);
+		return (-1);
 	cfg->map.grid = ft_calloc(cfg->map.height, sizeof(char *));
 	if (!cfg->map.grid)
-		return (PARSING_FAILURE);
+		return (-1);
 	fill_map_grid(cfg, lines, start);
-	return (PARSING_SUCCESS);
+	return (0);
 }
