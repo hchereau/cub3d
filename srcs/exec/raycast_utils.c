@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 09:33:50 by linux             #+#    #+#             */
-/*   Updated: 2025/07/31 10:08:19 by linux            ###   ########.fr       */
+/*   Updated: 2025/07/31 10:37:01 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,35 +40,35 @@ void	ray_dda(t_game *g, t_ray *r)
 		r->dist = (r->map_y - g->posy + (1 - r->step_y) / 2) / r->dir_y;
 }
 
-void	ray_wall(t_game *g, t_ray *r)
-{
-	t_img	*tex;
+//void	ray_wall(t_game *g, t_ray *r)
+//{
+//	t_img	*tex;
 
-	r->line_h = (int)(SCREEN_H / r->dist);
-	r->start = -r->line_h / 2 + SCREEN_H / 2;
-	if (r->start < 0)
-		r->start = 0;
-	r->end = r->line_h / 2 + SCREEN_H / 2;
-	if (r->end >= SCREEN_H)
-		r->end = SCREEN_H - 1;
-	if (r->side == 0 && r->dir_x > 0)
-		r->tex = 2;
-	else if (r->side == 0)
-		r->tex = 3;
-	else if (r->side == 1 && r->dir_y > 0)
-		r->tex = 0;
-	else
-		r->tex = 1;
-	tex = &g->tex[r->tex];
-	if (r->side == 0)
-		r->wall_x = g->posy + r->dist * r->dir_y;
-	else
-		r->wall_x = g->posx + r->dist * r->dir_x;
-	r->wall_x -= floor(r->wall_x);
-	r->tex_x = (int)(r->wall_x * tex->width);
-	if ((r->side == 0 && r->dir_x > 0) || (r->side == 1 && r->dir_y < 0))
-		r->tex_x = tex->width - r->tex_x - 1;
-}
+//	r->line_h = (int)(SCREEN_H / r->dist);
+//	r->start = -r->line_h / 2 + SCREEN_H / 2;
+//	if (r->start < 0)
+//		r->start = 0;
+//	r->end = r->line_h / 2 + SCREEN_H / 2;
+//	if (r->end >= SCREEN_H)
+//		r->end = SCREEN_H - 1;
+//	if (r->side == 0 && r->dir_x > 0)
+//		r->tex = 2;
+//	else if (r->side == 0)
+//		r->tex = 3;
+//	else if (r->side == 1 && r->dir_y > 0)
+//		r->tex = 0;
+//	else
+//		r->tex = 1;
+//	tex = &g->tex[r->tex];
+//	if (r->side == 0)
+//		r->wall_x = g->posy + r->dist * r->dir_y;
+//	else
+//		r->wall_x = g->posx + r->dist * r->dir_x;
+//	r->wall_x -= floor(r->wall_x);
+//	r->tex_x = (int)(r->wall_x * tex->width);
+//	if ((r->side == 0 && r->dir_x > 0) || (r->side == 1 && r->dir_y < 0))
+//		r->tex_x = tex->width - r->tex_x - 1;
+//}
 
 static void	draw_wall(t_game *g, t_ray *r, int x)
 {

@@ -41,6 +41,7 @@ SRCS += player_init.c
 SRCS += player_movement.c
 SRCS += raycast_utils.c
 SRCS += ray_init.c
+SRCS += ray_wall.c
 
 vpath %.c $(PATH_SRCS)
 
