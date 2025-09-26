@@ -30,6 +30,7 @@ SRCS += color.c
 SRCS += map.c
 SRCS += validate_map.c
 SRCS += error.c
+SRCS += free_config.c
 
 # srcs/exec/
 
@@ -42,6 +43,7 @@ SRCS += player_movement.c
 SRCS += raycast_utils.c
 SRCS += ray_init.c
 SRCS += ray_wall.c
+SRCS += cleanup.c
 
 vpath %.c $(PATH_SRCS)
 

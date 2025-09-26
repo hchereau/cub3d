@@ -5,15 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/25 09:36:35 by linux             #+#    #+#             */
-/*   Updated: 2025/07/30 10:01:51 by linux            ###   ########.fr       */
+/*   Created: 2025/09/15 15:49:49 by linux             #+#    #+#             */
+/*   Updated: 2025/09/15 15:49:52 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 #include "libft.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 static int	loop_game(t_game *g)
 {
@@ -32,9 +30,15 @@ static int	init_game(t_game *g, t_config cfg)
 		return (1);
 	g->win = mlx_new_window(g->mlx, SCREEN_W, SCREEN_H, "cub3D");
 	if (!g->win)
+	{
+		destroy_graphics(g);
 		return (1);
+	}
 	if (init_image(g) || load_textures(g))
+	{
+		destroy_graphics(g);
 		return (1);
+	}
 	init_gameplay(g);
 	return (0);
 }
@@ -52,5 +56,4 @@ int	exec_game(t_config cfg)
 	mlx_loop(g.mlx);
 	return (0);
 }
-
 

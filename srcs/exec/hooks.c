@@ -5,17 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/30 10:02:20 by linux             #+#    #+#             */
-/*   Updated: 2025/07/30 10:05:05 by linux            ###   ########.fr       */
+/*   Created: 2025/09/15 15:51:52 by linux             #+#    #+#             */
+/*   Updated: 2025/09/15 15:52:01 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
-#include <stdlib.h>
+#include "parse.h"
+
+
+/* destroy_graphics defined in cleanup.c */
 
 int	close_game(t_game *g)
 {
-	mlx_destroy_window(g->mlx, g->win);
+	destroy_graphics(g);
+	free_config(&g->cfg);
 	exit(0);
 	return (0);
 }

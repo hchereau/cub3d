@@ -49,7 +49,7 @@ Zoom image will be displayed
 
 Player direction
 isRayFacingDown  = rayAngle > 0 && rayAngle < pi [180];
-isRayFacingUp    = !isRayFacingDown;
+isRayFacingUp	= !isRayFacingDown;
 isRayFacingRight = rayAngle < (0.5 * pi) [90] || rayAngle > (1.5 * pi) [270];
 isRayFacingLeft  = !isRayFacingRight;
 Ray-Casting Calculations
@@ -68,14 +68,14 @@ Zoom image will be displayed
 Horizontal Intersection Points
 To calculate Horizontal Intersection A(x, y)
 
-Ay         = floor(player_y / TILE) * TILE;
+Ay		 = floor(player_y / TILE) * TILE;
 if (RayFacingDown)
   Ay += TILE;
 
 // tan(α)  = Opposite / Adjacent;
 // tan(α)  = (Ay - Py) / (Ax - Px);
 // Ax - Px = (Ay - Py) / tan(α);
-Ax         = Px + (Ay - Py) / tan(α);
+Ax		 = Px + (Ay - Py) / tan(α);
 Zoom image will be displayed
 
 Horizontal Intersection Point A(x, y)
@@ -85,7 +85,7 @@ yStep = TILE;
 
 // tan(α)   = opposite / adjacent;
 // adjacent = opposite / tan(α);
-xStep       = yStep / tan(α);
+xStep	   = yStep / tan(α);
 After finding out the Steps that we will need to figure out the wall intersection, the Steps depends on the player direction.
 
 If the player is facing left xStep must be negative to increment (decrement the value), but if the player is facing right xStep must be positive to increment.
@@ -110,14 +110,14 @@ After getting what we need, the Horizontal Intersection of the ray A(x ,y), xSte
 
 First, we will find out the Vertical Intersection Point (point A), after that we will figure out the distance between each intersection xStep & yStep, then we convert each intersection point A(x, y) into map index map(i, j), Finally we check if (intersection hits wall); then: store vertical hit distance; else: find next vertical intersection;
 
-Ax         = floor(player_x / TILE) * TILE;
+Ax		 = floor(player_x / TILE) * TILE;
 if (RayFacingRight)
   Ax += TILE;
 
 // tan(α)  = Opposite / Adjacent;
 // tan(α)  = (Ay - Py) / (Ax - Px);
 // Ay - Py = tan(α) * (Ax - Px);
-Ay         = (tan(α) * (Ax - Px)) + Py;
+Ay		 = (tan(α) * (Ax - Px)) + Py;
 Zoom image will be displayed
 
 Vertical Intersection
@@ -127,7 +127,7 @@ xStep = TILE;
 
 // tan(α)   = opposite / adjacent;
 // opposite = adjacent * tan(α);
-yStep       = yStep * tan(α);
+yStep	   = yStep * tan(α);
 Zoom image will be displayed
 
 And as before in the Horizontal Intersection Section, After finding out the Steps that we will need to figure out the wall intersection, the Steps depends on the player direction.
@@ -202,9 +202,9 @@ Zoom image will be displayed
 What is happening, and what we want
 To fix the problem we need to correct each angle (correct it), to do so
 
-// cos(α)           = correct_distance / distorted_distance;
+// cos(α)		   = correct_distance / distorted_distance;
 // correct_distance = cos(α) * distorted_distance;
-correct_distance    = ray_distance * cos(ray_angle - rotAngle);
+correct_distance	= ray_distance * cos(ray_angle - rotAngle);
 The (ray_angle — rotAngle) is the relative angle calculated between the ray’s direction and the player’s facing direction (Demonstration is bellow).
 
 Zoom image will be displayed
@@ -218,11 +218,11 @@ Zoom image will be displayed
 Corrected Distance
 To project the wall, we need to do some calculations. After getting the WALL STRIP HEIGHT, we have to get 2 more things, the WALL TOP PIXEL & WALL BOTTOM PIXEL, to do so
 
-wall_top_pixel    = (WIN_HEIGHT / 2) - (wall_strip_height / 2);
+wall_top_pixel	= (WIN_HEIGHT / 2) - (wall_strip_height / 2);
 wall_bottom_pixel = (WIN_HEIGHT / 2) + (wall_strip_height / 2);
 
 if (wall_top_pixel < 0)
-   wall_top_pixel    = 0;
+   wall_top_pixel	= 0;
 
 if (wall_bottom_pixel > WIN_HEIGHT)
    wall_bottom_pixel = WIN_HEIGHT;
@@ -239,10 +239,10 @@ img->pixels is a pointer to the pixel data of the img. The type of this pointer 
 Let’s take an example
 
 uint8_t pixel_data[] = {
-    0x12, 0x34, 0x56, 0x78, // First group of 4 bytes
-    0x9A, 0xBC, 0xDE, 0xF0, // Second group of 4 bytes
-    0x11, 0x22, 0x33, 0x44, // Third group of 4 bytes
-    0x55, 0x66, 0x77, 0x88  // Fourth group of 4 bytes
+	0x12, 0x34, 0x56, 0x78, // First group of 4 bytes
+	0x9A, 0xBC, 0xDE, 0xF0, // Second group of 4 bytes
+	0x11, 0x22, 0x33, 0x44, // Third group of 4 bytes
+	0x55, 0x66, 0x77, 0x88  // Fourth group of 4 bytes
 };
 
 img->pixels = pixel_data;
@@ -253,10 +253,10 @@ img->pixels = pixel_data;
 int32_t *img_px = (int32_t *)img->pixels;
 // When they are casted to 32-bit format (little endian system)
 /*
-    img_px[0] == 0x78563412  [0x12345678 (big endian system)]
-    img_px[1] == 0xF0DEBC9A  [0x9ABCDEF0]
-    img_px[2] == 0x44332211  [0x11223344]
-    img_px[3] == 0x88776655  [0x55667788]
+	img_px[0] == 0x78563412  [0x12345678 (big endian system)]
+	img_px[1] == 0xF0DEBC9A  [0x9ABCDEF0]
+	img_px[2] == 0x44332211  [0x11223344]
+	img_px[3] == 0x88776655  [0x55667788]
 */
 Zoom image will be displayed
 
@@ -265,10 +265,10 @@ After getting the pixel’s color and casting it to 32-bit (4 bytes), we now put
 
 — x-cords
 
-float    get_xcord (t_rays *rays, mlx_texture_t *img)
+float	get_xcord (t_rays *rays, mlx_texture_t *img)
 {
    if (rays->was_hit_vertical)
-      return (fmodf(rays->wall_hit_y * (img->width / TILE), img->width));
+	  return (fmodf(rays->wall_hit_y * (img->width / TILE), img->width));
    return (fmodf(rays->wall_hit_x * (img->width / TILE, img->width));
 }
 The get_xcord helps determine the x-coordinate starting position on the texture for mapping it to the wall in the game world.
@@ -324,7 +324,7 @@ int Alpha = 255 [0000 0000 0000 0000 0000 0000 1111 1111]
 // Red   << 24 [10000000 00000000 00000000 00000000]
 // Green << 16 [00000000 01000000 00000000 00000000]
 // Blue  << 8  [00000000 00000000 00100000 00000000]
-// Alpha       [00000000 00000000 00000000 11111111]
+// Alpha	   [00000000 00000000 00000000 11111111]
 
 int RGBA = Red << 24 | Green << 16 | Blue << 32 | Alpha;
 //  RBGA [10000000 01000000 00100000 11111111]
@@ -335,7 +335,7 @@ int color = 0x804020FF; [1000 0000 0100 0000 0010 0000 1111 1111] // ABGR
 int Red   = color >> 24 & 0xFF [0000 0000 0000 0000 0000 0000 1000 0000]
 int Green = color >> 16 & 0xFF [0000 0000 0000 0000 0000 0000 0100 0000]
 int Blue  = color >> 8 & 0xFF  [0000 0000 0000 0000 0000 0000 0010 0000]
-int Alpha = color & 0xFF       [0000 0000 0000 0000 0000 0000 1111 1111]
+int Alpha = color & 0xFF	   [0000 0000 0000 0000 0000 0000 1111 1111]
 
 int RGBA = Red << 24 | Green << 16 | Blue << 32 | Alpha;
 //  RBGA [10000000 01000000 00100000 11111111]
@@ -495,12 +495,12 @@ The ray starts at the position of the player (posX, posY).
 
 cameraX is the x-coordinate on the camera plane that the current x-coordinate of the screen represents, done this way so that the right side of the screen will get coordinate 1, the center of the screen gets coordinate 0, and the left side of the screen gets coordinate -1. Out of this, the direction of the ray can be calculated as was explained earlier: as the sum of the direction vector, and a part of the plane vector. This has to be done both for the x and y coordinate of the vector (since adding two vectors is adding their x-coordinates, and adding their y-coordinates).
 
-    for(int x = 0; x < w; x++)
-    {
-      //calculate ray position and direction
-      double cameraX = 2 * x / double(w) - 1; //x-coordinate in camera space
-      double rayDirX = dirX + planeX * cameraX;
-      double rayDirY = dirY + planeY * cameraX;
+	for(int x = 0; x < w; x++)
+	{
+	  //calculate ray position and direction
+	  double cameraX = 2 * x / double(w) - 1; //x-coordinate in camera space
+	  double rayDirX = dirX + planeX * cameraX;
+	  double rayDirY = dirY + planeY * cameraX;
 
 In the next code piece, more variables are declared and calculated, these have relevance to the DDA algorithm:
 
@@ -537,25 +537,25 @@ The DDA algorithm will always jump exactly one square each loop, either a square
 Finally, hit is used to determinate whether or not the coming loop may be ended, and side will contain if an x-side or a y-side of a wall was hit. If an x-side was hit, side is set to 0, if an y-side was hit, side will be 1. By x-side and y-side, I mean the lines of the grid that are the borders between two squares.
 
 
-      //which box of the map we're in
-      int mapX = int(posX);
-      int mapY = int(posY);
+	  //which box of the map we're in
+	  int mapX = int(posX);
+	  int mapY = int(posY);
 
-      //length of ray from current position to next x or y-side
-      double sideDistX;
-      double sideDistY;
+	  //length of ray from current position to next x or y-side
+	  double sideDistX;
+	  double sideDistY;
 
-       //length of ray from one x or y-side to next x or y-side
-      double deltaDistX = (rayDirX == 0) ? 1e30 : std::abs(1 / rayDirX);
-      double deltaDistY = (rayDirY == 0) ? 1e30 : std::abs(1 / rayDirY);
-      double perpWallDist;
+	   //length of ray from one x or y-side to next x or y-side
+	  double deltaDistX = (rayDirX == 0) ? 1e30 : std::abs(1 / rayDirX);
+	  double deltaDistY = (rayDirY == 0) ? 1e30 : std::abs(1 / rayDirY);
+	  double perpWallDist;
 
-      //what direction to step in x or y-direction (either +1 or -1)
-      int stepX;
-      int stepY;
+	  //what direction to step in x or y-direction (either +1 or -1)
+	  int stepX;
+	  int stepY;
 
-      int hit = 0; //was there a wall hit?
-      int side; //was a NS or a EW wall hit?
+	  int hit = 0; //was there a wall hit?
+	  int side; //was a NS or a EW wall hit?
 NOTE: If rayDirX or rayDirY are 0, the division through zero is avoided by setting it to a very high value 1e30. If you are using a language such as C++, Java or JS, this is not actually needed, as it supports the IEEE 754 floating point standard, which gives the result Infinity, which works correctly in the code below. However, some other languages, such as Python, disallow division through zero, so the more generic code that works everywhere is given above. 1e30 is an arbitrarily chosen high enough number and can be set to Infinity if your programming language supports assiging that value.
 
 Now, before the actual DDA can start, first stepX, stepY, and the initial sideDistX and sideDistY still have to be calculated.
@@ -568,27 +568,27 @@ The same goes for the y-component, but now with the first side above or below th
 For these values, the integer value mapX is used and the real position subtracted from it, and 1.0 is added in some of the cases depending if the side to the left or right, of the top or the bottom is used. Then you get the perpendicular distance to this side, so multiply it with deltaDistX or deltaDistY to get the real Euclidean distance.
 
 
-      //calculate step and initial sideDist
-      if (rayDirX < 0)
-      {
-        stepX = -1;
-        sideDistX = (posX - mapX) * deltaDistX;
-      }
-      else
-      {
-        stepX = 1;
-        sideDistX = (mapX + 1.0 - posX) * deltaDistX;
-      }
-      if (rayDirY < 0)
-      {
-        stepY = -1;
-        sideDistY = (posY - mapY) * deltaDistY;
-      }
-      else
-      {
-        stepY = 1;
-        sideDistY = (mapY + 1.0 - posY) * deltaDistY;
-      }
+	  //calculate step and initial sideDist
+	  if (rayDirX < 0)
+	  {
+		stepX = -1;
+		sideDistX = (posX - mapX) * deltaDistX;
+	  }
+	  else
+	  {
+		stepX = 1;
+		sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+	  }
+	  if (rayDirY < 0)
+	  {
+		stepY = -1;
+		sideDistY = (posY - mapY) * deltaDistY;
+	  }
+	  else
+	  {
+		stepY = 1;
+		sideDistY = (mapY + 1.0 - posY) * deltaDistY;
+	  }
 
 Now the actual DDA starts. It's a loop that increments the ray with 1 square every time, until a wall is hit. Each time, either it jumps a square in the x-direction (with stepX) or a square in the y-direction (with stepY), it always jumps 1 square at once. If the ray's direction would be the x-direction, the loop will only have to jump a square in the x-direction everytime, because the ray will never change its y-direction. If the ray is a bit sloped to the y-direction, then every so many jumps in the x-direction, the ray will have to jump one square in the y-direction. If the ray is exactly the y-direction, it never has to jump in the x-direction, etc...
 
@@ -596,25 +596,25 @@ sideDistX and sideDistY get incremented with deltaDistX with every jump in their
 
 When the ray has hit a wall, the loop ends, and then we'll know whether an x-side or y-side of a wall was hit in the variable "side", and what wall was hit with mapX and mapY. We won't know exactly where the wall was hit however, but that's not needed in this case because we won't use textured walls for now.
 
-      //perform DDA
-      while (hit == 0)
-      {
-        //jump to next map square, either in x-direction, or in y-direction
-        if (sideDistX < sideDistY)
-        {
-          sideDistX += deltaDistX;
-          mapX += stepX;
-          side = 0;
-        }
-        else
-        {
-          sideDistY += deltaDistY;
-          mapY += stepY;
-          side = 1;
-        }
-        //Check if ray has hit a wall
-        if (worldMap[mapX][mapY] > 0) hit = 1;
-      }
+	  //perform DDA
+	  while (hit == 0)
+	  {
+		//jump to next map square, either in x-direction, or in y-direction
+		if (sideDistX < sideDistY)
+		{
+		  sideDistX += deltaDistX;
+		  mapX += stepX;
+		  side = 0;
+		}
+		else
+		{
+		  sideDistY += deltaDistY;
+		  mapY += stepY;
+		  side = 1;
+		}
+		//Check if ray has hit a wall
+		if (worldMap[mapX][mapY] > 0) hit = 1;
+	  }
 
 After the DDA is done, we have to calculate the distance of the ray to the wall, so that we can calculate how high the wall has to be drawn after this.
 We don't use the Euclidean distance to the point representing player, but instead the distance to the camera plane (or, the distance of the point projected on the camera direction to the player), to avoid the fisheye effect. The fisheye effect is an effect you see if you use the real distance, where all the walls become rounded, and can make you sick if you rotate.
@@ -636,9 +636,9 @@ However, it can be computed simpler than that: due to how deltaDist and sideDist
 Depending on whether the ray hit an X side or Y side, the formula is computed using sideDistX, or sideDistY.
 
 
-      //Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
-      if(side == 0) perpWallDist = (sideDistX - deltaDistX);
-      else          perpWallDist = (sideDistY - deltaDistY);
+	  //Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
+	  if(side == 0) perpWallDist = (sideDistX - deltaDistX);
+	  else		  perpWallDist = (sideDistY - deltaDistY);
 A more detailed derivation of the perpWallDist formula is depicted in the image below, for the side == 1 case.
 
 Meaning of the points:
@@ -677,50 +677,50 @@ Now that we have the calculated distance (perpWallDist), we can calculate the he
 Then out of this lineHeight (which is thus the height of the vertical line that should be drawn), the start and end position of where we should really draw are calculated. The center of the wall should be at the center of the screen, and if these points lie outside the screen, they're capped to 0 or h-1.
 
 
-      //Calculate height of line to draw on screen
-      int lineHeight = (int)(h / perpWallDist);
+	  //Calculate height of line to draw on screen
+	  int lineHeight = (int)(h / perpWallDist);
 
-      //calculate lowest and highest pixel to fill in current stripe
-      int drawStart = -lineHeight / 2 + h / 2;
-      if(drawStart < 0)drawStart = 0;
-      int drawEnd = lineHeight / 2 + h / 2;
-      if(drawEnd >= h)drawEnd = h - 1;
+	  //calculate lowest and highest pixel to fill in current stripe
+	  int drawStart = -lineHeight / 2 + h / 2;
+	  if(drawStart < 0)drawStart = 0;
+	  int drawEnd = lineHeight / 2 + h / 2;
+	  if(drawEnd >= h)drawEnd = h - 1;
 
 Finally, depending on what number the wall that was hit has, a color is chosen. If an y-side was hit, the color is made darker, this gives a nicer effect. And then the vertical line is drawn with the verLine command. This ends the raycasting loop, after it has done this for every x at least.
 
-      //choose wall color
-      ColorRGB color;
-      switch(worldMap[mapX][mapY])
-      {
-        case 1:  color = RGB_Red;  break; //red
-        case 2:  color = RGB_Green;  break; //green
-        case 3:  color = RGB_Blue;   break; //blue
-        case 4:  color = RGB_White;  break; //white
-        default: color = RGB_Yellow; break; //yellow
-      }
+	  //choose wall color
+	  ColorRGB color;
+	  switch(worldMap[mapX][mapY])
+	  {
+		case 1:  color = RGB_Red;  break; //red
+		case 2:  color = RGB_Green;  break; //green
+		case 3:  color = RGB_Blue;   break; //blue
+		case 4:  color = RGB_White;  break; //white
+		default: color = RGB_Yellow; break; //yellow
+	  }
 
-      //give x and y sides different brightness
-      if (side == 1) {color = color / 2;}
+	  //give x and y sides different brightness
+	  if (side == 1) {color = color / 2;}
 
-      //draw the pixels of the stripe as a vertical line
-      verLine(x, drawStart, drawEnd, color);
-    }
+	  //draw the pixels of the stripe as a vertical line
+	  verLine(x, drawStart, drawEnd, color);
+	}
 
 After the raycasting loop is done, the time of the current and the previous frame are calculated, the FPS (frames per second) is calculated and printed, and the screen is redrawn so that everything (all the walls, and the value of the fps counter) becomes visible. After that the backbuffer is cleared with cls(), so that when we draw the walls again the next frame, the floor and ceiling will be black again instead of still containing pixels from the previous frame.
 
 The speed modifiers use frameTime, and a constant value, to determinate the speed of the moving and rotating of the input keys. Thanks to using the frameTime, we can make sure that the moving and rotating speed is independent of the processor speed.
 
-    //timing for input and FPS counter
-    oldTime = time;
-    time = getTicks();
-    double frameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
-    print(1.0 / frameTime); //FPS counter
-    redraw();
-    cls();
+	//timing for input and FPS counter
+	oldTime = time;
+	time = getTicks();
+	double frameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
+	print(1.0 / frameTime); //FPS counter
+	redraw();
+	cls();
 
-    //speed modifiers
-    double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
-    double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
+	//speed modifiers
+	double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
+	double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
 
 The last part is the input part, the keys are read.
 
@@ -730,41 +730,41 @@ The same is done if you press the down arrow, but then the direction is subtract
 
 To rotate, if the left or right arrow is pressed, both the direction vector and plane vector are rotated by using the formulas of multiplication with the rotation matrix (and over the angle rotSpeed).
 
-    readKeys();
-    //move forward if no wall in front of you
-    if (keyDown(SDLK_UP))
-    {
-      if(worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed;
-      if(worldMap[int(posX)][int(posY + dirY * moveSpeed)] == false) posY += dirY * moveSpeed;
-    }
-    //move backwards if no wall behind you
-    if (keyDown(SDLK_DOWN))
-    {
-      if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) posX -= dirX * moveSpeed;
-      if(worldMap[int(posX)][int(posY - dirY * moveSpeed)] == false) posY -= dirY * moveSpeed;
-    }
-    //rotate to the right
-    if (keyDown(SDLK_RIGHT))
-    {
-      //both camera direction and camera plane must be rotated
-      double oldDirX = dirX;
-      dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
-      dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
-      double oldPlaneX = planeX;
-      planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
-      planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
-    }
-    //rotate to the left
-    if (keyDown(SDLK_LEFT))
-    {
-      //both camera direction and camera plane must be rotated
-      double oldDirX = dirX;
-      dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
-      dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
-      double oldPlaneX = planeX;
-      planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
-      planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
-    }
+	readKeys();
+	//move forward if no wall in front of you
+	if (keyDown(SDLK_UP))
+	{
+	  if(worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed;
+	  if(worldMap[int(posX)][int(posY + dirY * moveSpeed)] == false) posY += dirY * moveSpeed;
+	}
+	//move backwards if no wall behind you
+	if (keyDown(SDLK_DOWN))
+	{
+	  if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) posX -= dirX * moveSpeed;
+	  if(worldMap[int(posX)][int(posY - dirY * moveSpeed)] == false) posY -= dirY * moveSpeed;
+	}
+	//rotate to the right
+	if (keyDown(SDLK_RIGHT))
+	{
+	  //both camera direction and camera plane must be rotated
+	  double oldDirX = dirX;
+	  dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
+	  dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
+	  double oldPlaneX = planeX;
+	  planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
+	  planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+	}
+	//rotate to the left
+	if (keyDown(SDLK_LEFT))
+	{
+	  //both camera direction and camera plane must be rotated
+	  double oldDirX = dirX;
+	  dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
+	  dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
+	  double oldPlaneX = planeX;
+	  planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
+	  planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
+	}
   }
 }
 
@@ -850,18 +850,18 @@ The main function now begins with generating the textures. We have a double loop
   for(int x = 0; x < texWidth; x++)
   for(int y = 0; y < texHeight; y++)
   {
-    int xorcolor = (x * 256 / texWidth) ^ (y * 256 / texHeight);
-    //int xcolor = x * 256 / texWidth;
-    int ycolor = y * 256 / texHeight;
-    int xycolor = y * 128 / texHeight + x * 128 / texWidth;
-    texture[0][texWidth * y + x] = 65536 * 254 * (x != y && x != texWidth - y); //flat red texture with black cross
-    texture[1][texWidth * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
-    texture[2][texWidth * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
-    texture[3][texWidth * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
-    texture[4][texWidth * y + x] = 256 * xorcolor; //xor green
-    texture[5][texWidth * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
-    texture[6][texWidth * y + x] = 65536 * ycolor; //red gradient
-    texture[7][texWidth * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
+	int xorcolor = (x * 256 / texWidth) ^ (y * 256 / texHeight);
+	//int xcolor = x * 256 / texWidth;
+	int ycolor = y * 256 / texHeight;
+	int xycolor = y * 128 / texHeight + x * 128 / texWidth;
+	texture[0][texWidth * y + x] = 65536 * 254 * (x != y && x != texWidth - y); //flat red texture with black cross
+	texture[1][texWidth * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
+	texture[2][texWidth * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
+	texture[3][texWidth * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
+	texture[4][texWidth * y + x] = 256 * xorcolor; //xor green
+	texture[5][texWidth * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
+	texture[6][texWidth * y + x] = 65536 * ycolor; //red gradient
+	texture[7][texWidth * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
   }
 
 This is again the start of the gameloop and initial declarations and calculations before the DDA algorithm. Nothing has changed here.
@@ -869,89 +869,89 @@ This is again the start of the gameloop and initial declarations and calculation
   //start the main loop
   while(!done())
   {
-    for(int x = 0; x < w; x++)
-    {
-      //calculate ray position and direction
-      double cameraX = 2*x/double(w)-1; //x-coordinate in camera space
-      double rayDirX = dirX + planeX*cameraX;
-      double rayDirY = dirY + planeY*cameraX;
+	for(int x = 0; x < w; x++)
+	{
+	  //calculate ray position and direction
+	  double cameraX = 2*x/double(w)-1; //x-coordinate in camera space
+	  double rayDirX = dirX + planeX*cameraX;
+	  double rayDirY = dirY + planeY*cameraX;
 
-      //which box of the map we're in
-      int mapX = int(posX);
-      int mapY = int(posY);
+	  //which box of the map we're in
+	  int mapX = int(posX);
+	  int mapY = int(posY);
 
-      //length of ray from current position to next x or y-side
-      double sideDistX;
-      double sideDistY;
+	  //length of ray from current position to next x or y-side
+	  double sideDistX;
+	  double sideDistY;
 
-      //length of ray from one x or y-side to next x or y-side
-      double deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
-      double deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
-      double perpWallDist;
+	  //length of ray from one x or y-side to next x or y-side
+	  double deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
+	  double deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
+	  double perpWallDist;
 
-      //what direction to step in x or y-direction (either +1 or -1)
-      int stepX;
-      int stepY;
+	  //what direction to step in x or y-direction (either +1 or -1)
+	  int stepX;
+	  int stepY;
 
-      int hit = 0; //was there a wall hit?
-      int side; //was a NS or a EW wall hit?
+	  int hit = 0; //was there a wall hit?
+	  int side; //was a NS or a EW wall hit?
 
-      //calculate step and initial sideDist
-      if (rayDirX < 0)
-      {
-        stepX = -1;
-        sideDistX = (posX - mapX) * deltaDistX;
-      }
-      else
-      {
-        stepX = 1;
-        sideDistX = (mapX + 1.0 - posX) * deltaDistX;
-      }
-      if (rayDirY < 0)
-      {
-        stepY = -1;
-        sideDistY = (posY - mapY) * deltaDistY;
-      }
-      else
-      {
-        stepY = 1;
-        sideDistY = (mapY + 1.0 - posY) * deltaDistY;
-      }
+	  //calculate step and initial sideDist
+	  if (rayDirX < 0)
+	  {
+		stepX = -1;
+		sideDistX = (posX - mapX) * deltaDistX;
+	  }
+	  else
+	  {
+		stepX = 1;
+		sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+	  }
+	  if (rayDirY < 0)
+	  {
+		stepY = -1;
+		sideDistY = (posY - mapY) * deltaDistY;
+	  }
+	  else
+	  {
+		stepY = 1;
+		sideDistY = (mapY + 1.0 - posY) * deltaDistY;
+	  }
 
 This is again the DDA loop, and the calculations of the distance and height, nothing has changed here either.
 
-      //perform DDA
-      while (hit == 0)
-      {
-        //jump to next map square, either in x-direction, or in y-direction
-        if (sideDistX < sideDistY)
-        {
-          sideDistX += deltaDistX;
-          mapX += stepX;
-          side = 0;
-        }
-        else
-        {
-          sideDistY += deltaDistY;
-          mapY += stepY;
-          side = 1;
-        }
-        //Check if ray has hit a wall
-        if (worldMap[mapX][mapY] > 0) hit = 1;
-      }
+	  //perform DDA
+	  while (hit == 0)
+	  {
+		//jump to next map square, either in x-direction, or in y-direction
+		if (sideDistX < sideDistY)
+		{
+		  sideDistX += deltaDistX;
+		  mapX += stepX;
+		  side = 0;
+		}
+		else
+		{
+		  sideDistY += deltaDistY;
+		  mapY += stepY;
+		  side = 1;
+		}
+		//Check if ray has hit a wall
+		if (worldMap[mapX][mapY] > 0) hit = 1;
+	  }
 
-      //Calculate distance of perpendicular ray (Euclidean distance would give fisheye effect!)
-      if(side == 0) perpWallDist = (sideDistX - deltaDistX);
-      else          perpWallDist = (sideDistY - deltaDistY);
+	  //Calculate distance of perpendicular ray (Euclidean distance would give fisheye effect!)
+	  if(side == 0) perpWallDist = (sideDistX - deltaDistX);
+	  else		  perpWallDist = (sideDistY - deltaDistY);
 
-      //Calculate height of line to draw on screen
-      int lineHeight = (int)(h / perpWallDist);
+	  //Calculate height of line to draw on screen
+	  int lineHeight = (int)(h / perpWallDist);
 
-      //calculate lowest and highest pixel to fill in current stripe
-      int drawStart = -lineHeight / 2 + h / 2;
-      if(drawStart < 0) drawStart = 0;
-      int drawEnd = lineHeight / 2 + h / 2;
-      if(drawEnd >= h) drawEnd = h - 1;
+	  //calculate lowest and highest pixel to fill in current stripe
+	  int drawStart = -lineHeight / 2 + h / 2;
+	  if(drawStart < 0) drawStart = 0;
+	  int drawEnd = lineHeight / 2 + h / 2;
+	  if(drawEnd >= h) drawEnd = h - 1;
 
 The following calculations are new however, and replace the color chooser of the untextured raycaster.
 The variable texNum is the value of the current map square minus 1, the reason is that there exists a texture 0, but map tile 0 has no texture since it represents an empty space. To be able to use texture 0 anyway, substract 1 so that map tiles with value 1 will give texture 0, etc...
@@ -960,19 +960,19 @@ The value wallX represents the exact value where the wall was hit, not just the 
 
 Finally, texX is the x-coordinate of the texture, and this is calculated out of wallX.
 
-      //texturing calculations
-      int texNum = worldMap[mapX][mapY] - 1; //1 subtracted from it so that texture 0 can be used!
+	  //texturing calculations
+	  int texNum = worldMap[mapX][mapY] - 1; //1 subtracted from it so that texture 0 can be used!
 
-      //calculate value of wallX
-      double wallX; //where exactly the wall was hit
-      if (side == 0) wallX = posY + perpWallDist * rayDirY;
-      else           wallX = posX + perpWallDist * rayDirX;
-      wallX -= floor((wallX));
+	  //calculate value of wallX
+	  double wallX; //where exactly the wall was hit
+	  if (side == 0) wallX = posY + perpWallDist * rayDirY;
+	  else		   wallX = posX + perpWallDist * rayDirX;
+	  wallX -= floor((wallX));
 
-      //x coordinate on the texture
-      int texX = int(wallX * double(texWidth));
-      if(side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
-      if(side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
+	  //x coordinate on the texture
+	  int texX = int(wallX * double(texWidth));
+	  if(side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
+	  if(side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
 
 Now that we know the x-coordinate of the texture, we know that this coordinate will remain the same, because we stay in the same vertical stripe of the screen. Now we need a loop in the y-direction to give each pixel of the vertical stripe the correct y-coordinate of the texture, called texY.
 
@@ -990,74 +990,74 @@ The color is made darker by dividing R, G and B through 2. Dividing a decimal nu
 
 Finally, the current buffer pixel is set to this color, and we move on to the next y.
 
-            // How much to increase the texture coordinate per screen pixel
-      double step = 1.0 * texHeight / lineHeight;
-      // Starting texture coordinate
-      double texPos = (drawStart - h / 2 + lineHeight / 2) * step;
-      for(int y = drawStart; y<drawEnd; y++)
-      {
-        // Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
-        int texY = (int)texPos & (texHeight - 1);
-        texPos += step;
-        Uint32 color = texture[texNum][texHeight * texY + texX];
-        //make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-        if(side == 1) color = (color >> 1) & 8355711;
-        buffer[y][x] = color;
-      }
-    }
+			// How much to increase the texture coordinate per screen pixel
+	  double step = 1.0 * texHeight / lineHeight;
+	  // Starting texture coordinate
+	  double texPos = (drawStart - h / 2 + lineHeight / 2) * step;
+	  for(int y = drawStart; y<drawEnd; y++)
+	  {
+		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+		int texY = (int)texPos & (texHeight - 1);
+		texPos += step;
+		Uint32 color = texture[texNum][texHeight * texY + texX];
+		//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+		if(side == 1) color = (color >> 1) & 8355711;
+		buffer[y][x] = color;
+	  }
+	}
 
 Now the buffer still has to be drawn, and after that it has to be cleared (where in the untextured version we simply had to use "cls". Ensure to do it in scanline order for speed thanks to memory locality for caching). The rest of this code is again the same.
 
-    drawBuffer(buffer[0]);
-    for(int y = 0; y < h; y++) for(int x = 0; x < w; x++) buffer[y][x] = 0; //clear the buffer instead of cls()
-    //timing for input and FPS counter
-    oldTime = time;
-    time = getTicks();
-    double frameTime = (time - oldTime) / 1000.0; //frametime is the time this frame has taken, in seconds
-    print(1.0 / frameTime); //FPS counter
-    redraw();
+	drawBuffer(buffer[0]);
+	for(int y = 0; y < h; y++) for(int x = 0; x < w; x++) buffer[y][x] = 0; //clear the buffer instead of cls()
+	//timing for input and FPS counter
+	oldTime = time;
+	time = getTicks();
+	double frameTime = (time - oldTime) / 1000.0; //frametime is the time this frame has taken, in seconds
+	print(1.0 / frameTime); //FPS counter
+	redraw();
 
-    //speed modifiers
-    double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
-    double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
+	//speed modifiers
+	double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
+	double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
 
 And here's again the keys, nothing has changed here either. If you like you can try to add strafe keys (to strafe to the left and right). These have to be made the same way as the up and down keys, but use planeX and planeY instead of dirX and dirY.
 
-    readKeys();
-    //move forward if no wall in front of you
-    if (keyDown(SDLK_UP))
-    {
-      if(worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed;
-      if(worldMap[int(posX)][int(posY + dirY * moveSpeed)] == false) posY += dirY * moveSpeed;
-    }
-    //move backwards if no wall behind you
-    if (keyDown(SDLK_DOWN))
-    {
-      if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) posX -= dirX * moveSpeed;
-      if(worldMap[int(posX)][int(posY - dirY * moveSpeed)] == false) posY -= dirY * moveSpeed;
-    }
-    //rotate to the right
-    if (keyDown(SDLK_RIGHT))
-    {
-      //both camera direction and camera plane must be rotated
-      double oldDirX = dirX;
-      dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
-      dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
-      double oldPlaneX = planeX;
-      planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
-      planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
-    }
-    //rotate to the left
-    if (keyDown(SDLK_LEFT))
-    {
-      //both camera direction and camera plane must be rotated
-      double oldDirX = dirX;
-      dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
-      dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
-      double oldPlaneX = planeX;
-      planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
-      planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
-    }
+	readKeys();
+	//move forward if no wall in front of you
+	if (keyDown(SDLK_UP))
+	{
+	  if(worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed;
+	  if(worldMap[int(posX)][int(posY + dirY * moveSpeed)] == false) posY += dirY * moveSpeed;
+	}
+	//move backwards if no wall behind you
+	if (keyDown(SDLK_DOWN))
+	{
+	  if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) posX -= dirX * moveSpeed;
+	  if(worldMap[int(posX)][int(posY - dirY * moveSpeed)] == false) posY -= dirY * moveSpeed;
+	}
+	//rotate to the right
+	if (keyDown(SDLK_RIGHT))
+	{
+	  //both camera direction and camera plane must be rotated
+	  double oldDirX = dirX;
+	  dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
+	  dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
+	  double oldPlaneX = planeX;
+	  planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
+	  planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+	}
+	//rotate to the left
+	if (keyDown(SDLK_LEFT))
+	{
+	  //both camera direction and camera plane must be rotated
+	  double oldDirX = dirX;
+	  dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
+	  dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
+	  double oldPlaneX = planeX;
+	  planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
+	  planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
+	}
   }
 }
 

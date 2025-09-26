@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 10:27:34 by linux             #+#    #+#             */
-/*   Updated: 2025/07/31 09:40:26 by linux            ###   ########.fr       */
+/*   Created: 2025/09/15 15:51:22 by linux             #+#    #+#             */
+/*   Updated: 2025/09/15 15:51:25 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "mlx.h"
 # include "cub3d.h"
 # include <math.h>
+# include <stdlib.h>
+# include <stdio.h>
 
 # define SCREEN_W 1920
 # define SCREEN_H 1080
@@ -99,6 +101,7 @@ void	init_gameplay(t_game *g);
 int		key_press(int key, t_game *g);
 int		key_release(int key, t_game *g);
 int		close_game(t_game *g);
+void	destroy_graphics(t_game *g);
 void	img_pixel_put(t_img *img, int x, int y, int color);
 void	ray_init(t_game *g, t_ray *r, int x);
 void	ray_dda(t_game *g, t_ray *r);

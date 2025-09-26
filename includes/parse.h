@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/21 10:22:29 by linux             #+#    #+#             */
-/*   Updated: 2025/07/21 10:41:08 by linux            ###   ########.fr       */
+/*   Created: 2025/09/15 15:51:33 by linux             #+#    #+#             */
+/*   Updated: 2025/09/15 15:51:35 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <stdlib.h>
 
 # define EXIT_FAILURE 1
 # define BUFFER_SIZE_PARSING_CUBE 1024
@@ -38,5 +39,6 @@ int		parse_color(char *line, t_config *cfg, int is_floor);
 int		parse_texture(char *line, char **store);
 int		parse_map(char **lines, int start, t_config *cfg);
 void	validate_map(t_config *cfg);
+void	free_config(t_config *cfg);
 
 #endif

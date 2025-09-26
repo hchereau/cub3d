@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/31 09:51:35 by linux             #+#    #+#             */
-/*   Updated: 2025/07/31 10:16:47 by linux            ###   ########.fr       */
+/*   Created: 2025/09/15 15:52:55 by linux             #+#    #+#             */
+/*   Updated: 2025/09/15 15:52:57 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
-
 
 static void	compute_camera_and_direction(t_game *g, t_ray *r, int x)
 {
