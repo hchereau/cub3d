@@ -6,16 +6,16 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:07:46 by linux             #+#    #+#             */
-/*   Updated: 2025/09/15 16:07:49 by linux            ###   ########.fr       */
+/*   Updated: 2025/09/29 13:06:44 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static void	set_player(t_config *cfg, int x, int y, char c)
+static void	set_player(t_config *cfg, int x, int y, char c, t_parse_ctx *ctx)
 {
 	if (cfg->player.dir)
-		parse_error("Multiple player");
+		parse_error("Multiple player", ctx);
 	cfg->player.pos.x = x;
 	cfg->player.pos.y = y;
 	cfg->player.dir = c;
@@ -26,7 +26,7 @@ static int	line_len(char *line)
 	return ((int)ft_strlen(line));
 }
 
-static void	fill_map_grid(t_config *cfg, char **lines, int start)
+static void	fill_map_grid(t_config *cfg, char **lines, int start, t_parse_ctx *ctx)
 {
 	int	y;
 	int	x;
@@ -44,7 +44,7 @@ static void	fill_map_grid(t_config *cfg, char **lines, int start)
 		{
 			if (ft_strchr("NSEW", cfg->map.grid[y][x]))
 			{
-				set_player(cfg, x, y, cfg->map.grid[y][x]);
+				set_player(cfg, x, y, cfg->map.grid[y][x], ctx);
 				cfg->map.grid[y][x] = '0';
 			}
 			x++;
@@ -53,7 +53,7 @@ static void	fill_map_grid(t_config *cfg, char **lines, int start)
 	}
 }
 
-t_state_parsing	parse_map(char **lines, int start, t_config *cfg)
+t_state_parsing	parse_map(char **lines, int start, t_config *cfg, t_parse_ctx *ctx)
 {
 	int	i;
 
@@ -75,6 +75,6 @@ t_state_parsing	parse_map(char **lines, int start, t_config *cfg)
 	cfg->map.grid = ft_calloc(cfg->map.height, sizeof(char *));
 	if (!cfg->map.grid)
 		return (PARSING_FAILURE);
-	fill_map_grid(cfg, lines, start);
+	fill_map_grid(cfg, lines, start, ctx);
 	return (PARSING_SUCCESS);
 }
