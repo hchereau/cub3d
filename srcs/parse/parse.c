@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 20:16:20 by linux             #+#    #+#             */
-/*   Updated: 2025/09/29 13:06:05 by linux            ###   ########.fr       */
+/*   Updated: 2025/09/29 14:10:42 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,17 @@
 static int	handle_line(char *line, t_config *cfg, t_parse_ctx *ctx)
 {
 	if (!ft_strncmp(line, "NO", 2))
-		return (parse_texture(line + 2, &cfg->textures.north, ctx));
+		return (parse_texture(line + 2, &cfg->textures.north,
+				ctx, "north texture"));
 	if (!ft_strncmp(line, "SO", 2))
-		return (parse_texture(line + 2, &cfg->textures.south, ctx));
+		return (parse_texture(line + 2, &cfg->textures.south,
+				ctx, "south texture"));
 	if (!ft_strncmp(line, "WE", 2))
-		return (parse_texture(line + 2, &cfg->textures.west, ctx));
+		return (parse_texture(line + 2, &cfg->textures.west,
+				ctx, "west texture"));
 	if (!ft_strncmp(line, "EA", 2))
-		return (parse_texture(line + 2, &cfg->textures.east, ctx));
+		return (parse_texture(line + 2, &cfg->textures.east,
+				ctx, "east texture"));
 	if (!ft_strncmp(line, "F", 1))
 		return (parse_color(line + 1, cfg, 1));
 	if (!ft_strncmp(line, "C", 1))

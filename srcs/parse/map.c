@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:07:46 by linux             #+#    #+#             */
-/*   Updated: 2025/09/29 13:06:44 by linux            ###   ########.fr       */
+/*   Updated: 2025/09/29 14:10:42 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static int	line_len(char *line)
 	return ((int)ft_strlen(line));
 }
 
-static void	fill_map_grid(t_config *cfg, char **lines, int start, t_parse_ctx *ctx)
+static void	fill_map_grid(t_config *cfg, char **lines, int start,
+			t_parse_ctx *ctx)
 {
 	int	y;
 	int	x;
@@ -36,6 +37,8 @@ static void	fill_map_grid(t_config *cfg, char **lines, int start, t_parse_ctx *c
 	while (y < cfg->map.height)
 	{
 		cfg->map.grid[y] = ft_calloc(cfg->map.width + 1, 1);
+		if (!cfg->map.grid[y])
+			parse_error("Memory error", ctx);
 		ft_memset(cfg->map.grid[y], ' ', cfg->map.width);
 		len = line_len(lines[start + y]);
 		ft_memcpy(cfg->map.grid[y], lines[start + y], len);
@@ -53,7 +56,8 @@ static void	fill_map_grid(t_config *cfg, char **lines, int start, t_parse_ctx *c
 	}
 }
 
-t_state_parsing	parse_map(char **lines, int start, t_config *cfg, t_parse_ctx *ctx)
+t_state_parsing	parse_map(char **lines, int start, t_config *cfg,
+			t_parse_ctx *ctx)
 {
 	int	i;
 
