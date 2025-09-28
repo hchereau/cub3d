@@ -18,3 +18,4 @@ library (-lm man man 3 math).
 • All functions of the MinilibX
 library.
 for functions library.
+functions take a maximum of 4 arguments

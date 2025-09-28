@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 20:16:40 by linux             #+#    #+#             */
-/*   Updated: 2025/09/26 20:16:49 by linux            ###   ########.fr       */
+/*   Updated: 2025/09/28 18:04:59 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	(void)argc;
 	ft_memset(&cfg, 0, sizeof(cfg));
 	if (!argv[1])
-		return (printf("Error\nNo file\n"), 1);
+		return (printf("Error\nNo file\n"), EXIT_FAILURE);
 	parse_file(argv[1], &cfg);
 	printf("Loaded map %dx%d\n", cfg.map.width, cfg.map.height);
 	(void)exec_game(cfg);
