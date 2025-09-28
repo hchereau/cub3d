@@ -55,6 +55,8 @@ void	parse_file(const char *file, t_config *cfg)
 	char	**lines;
 	int		map_start;
 
+	parse_register_config(cfg);
+	parse_register_lines(NULL);
 	data = file_to_string(file);
 	if (!data)
 		parse_error("File read error");
@@ -62,9 +64,12 @@ void	parse_file(const char *file, t_config *cfg)
 	free(data);
 	if (!lines)
 		parse_error("Memory error");
+	parse_register_lines(lines);
 	map_start = parse_config(lines, cfg);
 	if (parse_map(lines, map_start, cfg) < 0)
 		parse_error("Map error");
 	validate_map(cfg);
 	free_split(lines);
+	parse_register_lines(NULL);
+	parse_register_config(NULL);
 }

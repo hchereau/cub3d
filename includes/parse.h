@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 15:51:33 by linux             #+#    #+#             */
-/*   Updated: 2025/09/15 15:51:35 by linux            ###   ########.fr       */
+/*   Updated: 2025/09/28 15:27:22 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef enum e_state_parsing
 void	parse_file(const char *file, t_config *config);
 char	*file_to_string(const char *path);
 void	parse_error(const char *msg);
+void	parse_register_config(t_config *cfg);
+void	parse_register_lines(char **lines);
 int		is_empty_line(char *line);
 int		is_map_line(char *line);
 void	free_split(char **tab);

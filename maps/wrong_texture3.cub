@@ -1,5 +1,6 @@
 NO ./textures/north.xpm
-SO ./textures/test_bad_texture.xpm
+NO ./textures/north.xpm
+SO ./textures/south.xpm
 WE ./textures/west.xpm
 EA ./textures/east.xpm
 
@@ -11,4 +12,3 @@ C 255,255,255
 1110N0001
 100000001
 111111111
-
