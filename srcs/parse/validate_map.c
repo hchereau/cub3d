@@ -12,20 +12,35 @@
 
 #include "parse.h"
 
-static int	is_outside(t_config *cfg, int x, int y)
+static char	get_cell(t_config *cfg, int x, int y)
 {
-	return (x < 0 || y < 0 || x >= cfg->map.width || y >= cfg->map.height);
+	if (x < 0 || y < 0)
+		return (' ');
+	if (x >= cfg->map.width || y >= cfg->map.height)
+		return (' ');
+	return (cfg->map.grid[y][x]);
+}
+
+static int	is_border(t_config *cfg, int x, int y)
+{
+	if (x == 0 || y == 0)
+		return (1);
+	if (x >= cfg->map.width - 1)
+		return (1);
+	if (y >= cfg->map.height - 1)
+		return (1);
+	return (0);
 }
 
 static void	check_cell(t_config *cfg, int x, int y, t_parse_ctx *ctx)
 {
 	if (cfg->map.grid[y][x] != '0')
 		return ;
-	if (is_outside(cfg, x - 1, y) || is_outside(cfg, x + 1, y)
-		|| is_outside(cfg, x, y - 1) || is_outside(cfg, x, y + 1))
+	if (is_border(cfg, x, y))
 		parse_error("Map not closed", ctx);
-	if (cfg->map.grid[y - 1][x] == ' ' || cfg->map.grid[y + 1][x] == ' '
-		|| cfg->map.grid[y][x - 1] == ' ' || cfg->map.grid[y][x + 1] == ' ')
+	if (get_cell(cfg, x - 1, y) == ' ' || get_cell(cfg, x + 1, y) == ' ')
+		parse_error("Map not closed", ctx);
+	if (get_cell(cfg, x, y - 1) == ' ' || get_cell(cfg, x, y + 1) == ' ')
 		parse_error("Map not closed", ctx);
 }
 
