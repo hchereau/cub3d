@@ -58,7 +58,7 @@ static int	parse_config(char **lines, t_config *cfg, t_parse_ctx *ctx)
 	{
 		if (is_empty_line(lines[i]))
 			i++;
-		else if (handle_line(lines[i], cfg, ctx) == 0)
+		else if (handle_line(lines[i], cfg, ctx) == PARSING_SUCCESS)
 			i++;
 		else if (is_map_line(lines[i]))
 			return (i);
@@ -90,7 +90,7 @@ void	parse_file(const char *file, t_config *cfg)
 	ctx.lines = lines;
 	map_start = parse_config(lines, cfg, &ctx);
 	ensure_required_config(cfg, &ctx);
-	if (parse_map(lines, map_start, cfg, &ctx) < 0)
+	if (parse_map(lines, map_start, cfg, &ctx) != PARSING_SUCCESS)
 		parse_error("Map error", &ctx);
 	validate_map(cfg, &ctx);
 	free_split(lines);

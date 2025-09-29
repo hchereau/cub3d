@@ -12,27 +12,30 @@
 
 #include "parse.h"
 
-static int	is_outside(t_config *cfg, int x, int y)
+static char     cell_at(t_config *cfg, int x, int y)
 {
-	return (x < 0 || y < 0 || x >= cfg->map.width || y >= cfg->map.height);
+	if (x < 0 || y < 0)
+		return (' ');
+	if (x >= cfg->map.width || y >= cfg->map.height)
+		return (' ');
+	return (cfg->map.grid[y][x]);
 }
 
-static void	check_cell(t_config *cfg, int x, int y, t_parse_ctx *ctx)
+static void     check_cell(t_config *cfg, int x, int y, t_parse_ctx *ctx)
 {
-	if (cfg->map.grid[y][x] != '0')
+	if (cell_at(cfg, x, y) != '0')
 		return ;
-	if (is_outside(cfg, x - 1, y) || is_outside(cfg, x + 1, y)
-		|| is_outside(cfg, x, y - 1) || is_outside(cfg, x, y + 1))
-		parse_error("Map not closed", ctx);
-	if (cfg->map.grid[y - 1][x] == ' ' || cfg->map.grid[y + 1][x] == ' '
-		|| cfg->map.grid[y][x - 1] == ' ' || cfg->map.grid[y][x + 1] == ' ')
+	if (cell_at(cfg, x - 1, y) == ' '
+		|| cell_at(cfg, x + 1, y) == ' '
+		|| cell_at(cfg, x, y - 1) == ' '
+		|| cell_at(cfg, x, y + 1) == ' ')
 		parse_error("Map not closed", ctx);
 }
 
-void	validate_map(t_config *cfg, t_parse_ctx *ctx)
+void    validate_map(t_config *cfg, t_parse_ctx *ctx)
 {
-	int	x;
-	int	y;
+	int     x;
+	int     y;
 
 	if (!cfg->player.dir)
 		parse_error("Player missing", ctx);

@@ -45,9 +45,9 @@ int		is_map_line(char *line);
 void	free_split(char **tab);
 int		parse_color(char *line, t_config *cfg, int is_floor,
 			t_parse_ctx *ctx);
-int		parse_texture(char *line, char **store, t_parse_ctx *ctx,
+t_state_parsing	parse_texture(char *line, char **store, t_parse_ctx *ctx,
 			char *label);
-int		parse_map(char **lines, int start, t_config *cfg,
+t_state_parsing	parse_map(char **lines, int start, t_config *cfg,
 			t_parse_ctx *ctx);
 void	validate_map(t_config *cfg, t_parse_ctx *ctx);
 void	free_config(t_config *cfg);
