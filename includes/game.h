@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 15:51:22 by linux             #+#    #+#             */
-/*   Updated: 2025/09/29 16:37:11 by linux            ###   ########.fr       */
+/*   Updated: 2025/09/29 20:58:17 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ typedef struct s_game
 	double		plane_x;
 	double		plane_y;
 }	t_game;
-
 
 typedef struct s_ray
 {
