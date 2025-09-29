@@ -12,31 +12,48 @@
 
 #include "parse.h"
 
+#define MAP_TILES " 01NSEW"
+#define PLAYER_TILES "NSEW"
+
 static void	check_map_char(char c, t_parse_ctx *ctx)
 {
-	if (!ft_strchr(" 01NSEW", c))
+	if (!ft_strchr(MAP_TILES, c))
 		parse_error("Invalid character in map", ctx);
 }
 
-static void	set_player(t_config *cfg, int x, int y, char c, t_parse_ctx *ctx)
+static void	set_player(t_config *cfg, t_coord pos, char tile,
+			t_parse_ctx *ctx)
 {
 	if (cfg->player.dir)
 		parse_error("Multiple player", ctx);
-	cfg->player.pos.x = x;
-	cfg->player.pos.y = y;
-	cfg->player.dir = c;
+	cfg->player.pos = pos;
+	cfg->player.dir = tile;
 }
 
-static int	line_len(char *line)
+static void	process_map_row(t_config *cfg, int y, int len, t_parse_ctx *ctx)
 {
-	return ((int)ft_strlen(line));
+	int		x;
+	t_coord	pos;
+
+	x = 0;
+	while (x < len)
+	{
+		check_map_char(cfg->map.grid[y][x], ctx);
+		if (ft_strchr(PLAYER_TILES, cfg->map.grid[y][x]))
+		{
+			pos.x = x;
+			pos.y = y;
+			set_player(cfg, pos, cfg->map.grid[y][x], ctx);
+			cfg->map.grid[y][x] = '0';
+		}
+		x++;
+	}
 }
 
 static void	fill_map_grid(t_config *cfg, char **lines, int start,
 			t_parse_ctx *ctx)
 {
 	int	y;
-	int	x;
 	int	len;
 
 	y = 0;
@@ -46,19 +63,9 @@ static void	fill_map_grid(t_config *cfg, char **lines, int start,
 		if (!cfg->map.grid[y])
 			parse_error("Memory error", ctx);
 		ft_memset(cfg->map.grid[y], ' ', cfg->map.width);
-		len = line_len(lines[start + y]);
+		len = (int)ft_strlen(lines[start + y]);
 		ft_memcpy(cfg->map.grid[y], lines[start + y], len);
-		x = 0;
-		while (x < len)
-		{
-			check_map_char(cfg->map.grid[y][x], ctx);
-			if (ft_strchr("NSEW", cfg->map.grid[y][x]))
-			{
-				set_player(cfg, x, y, cfg->map.grid[y][x], ctx);
-				cfg->map.grid[y][x] = '0';
-			}
-			x++;
-		}
+		process_map_row(cfg, y, len, ctx);
 		y++;
 	}
 }
@@ -75,8 +82,8 @@ t_state_parsing	parse_map(char **lines, int start, t_config *cfg,
 	{
 		if (!is_empty_line(lines[i]))
 		{
-			if (line_len(lines[i]) > cfg->map.width)
-				cfg->map.width = line_len(lines[i]);
+			if ((int)ft_strlen(lines[i]) > cfg->map.width)
+				cfg->map.width = (int)ft_strlen(lines[i]);
 			cfg->map.height++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 15:51:22 by linux             #+#    #+#             */
-/*   Updated: 2025/09/15 15:51:25 by linux            ###   ########.fr       */
+/*   Updated: 2025/09/29 16:37:11 by linux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@
 # define KEY_D 100
 # define KEY_LEFT 65363
 # define KEY_RIGHT 65361
+# define TEX_COUNT 4
+# define TEX_NORTH 0
+# define TEX_SOUTH 1
+# define TEX_WEST 2
+# define TEX_EAST 3
+# define EVENT_KEY_PRESS 2
+# define EVENT_KEY_RELEASE 3
+# define EVENT_DESTROY 17
+# define MASK_KEY_PRESS 1L
+# define MASK_KEY_RELEASE 2L
+# define WINDOW_TITLE "cub3D"
 
 typedef struct s_img
 {
@@ -55,7 +66,7 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	t_img		screen;
-	t_img		tex[4];
+	t_img		tex[TEX_COUNT];
 	t_keys		keys;
 	t_config	cfg;
 	double		posx;

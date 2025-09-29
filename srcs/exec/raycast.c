@@ -27,6 +27,3 @@ void	render_frame(t_game *g)
 		++x;
 	}
 }
-
-
-

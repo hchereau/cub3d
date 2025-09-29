@@ -21,7 +21,7 @@ void	destroy_graphics(t_game *g)
 	if (g->screen.img)
 		mlx_destroy_image(g->mlx, g->screen.img);
 	i = 0;
-	while (i < 4)
+	while (i < TEX_COUNT)
 	{
 		if (g->tex[i].img)
 			mlx_destroy_image(g->mlx, g->tex[i].img);
@@ -36,4 +36,3 @@ void	destroy_graphics(t_game *g)
 		g->mlx = NULL;
 	}
 }
-

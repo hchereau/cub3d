@@ -44,13 +44,13 @@ int	load_texture(t_game *g, char *path, t_img *tex)
 
 int	load_textures(t_game *g)
 {
-	if (load_texture(g, g->cfg.textures.north, &g->tex[0]))
+	if (load_texture(g, g->cfg.textures.north, &g->tex[TEX_NORTH]))
 		return (1);
-	if (load_texture(g, g->cfg.textures.south, &g->tex[1]))
+	if (load_texture(g, g->cfg.textures.south, &g->tex[TEX_SOUTH]))
 		return (1);
-	if (load_texture(g, g->cfg.textures.west, &g->tex[2]))
+	if (load_texture(g, g->cfg.textures.west, &g->tex[TEX_WEST]))
 		return (1);
-	if (load_texture(g, g->cfg.textures.east, &g->tex[3]))
+	if (load_texture(g, g->cfg.textures.east, &g->tex[TEX_EAST]))
 		return (1);
 	return (0);
 }
