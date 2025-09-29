@@ -12,6 +12,12 @@
 
 #include "parse.h"
 
+static void	check_map_char(char c, t_parse_ctx *ctx)
+{
+	if (!ft_strchr(" 01NSEW", c))
+		parse_error("Invalid character in map", ctx);
+}
+
 static void	set_player(t_config *cfg, int x, int y, char c, t_parse_ctx *ctx)
 {
 	if (cfg->player.dir)
@@ -45,6 +51,7 @@ static void	fill_map_grid(t_config *cfg, char **lines, int start,
 		x = 0;
 		while (x < len)
 		{
+			check_map_char(cfg->map.grid[y][x], ctx);
 			if (ft_strchr("NSEW", cfg->map.grid[y][x]))
 			{
 				set_player(cfg, x, y, cfg->map.grid[y][x], ctx);

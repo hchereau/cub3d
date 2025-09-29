@@ -13,7 +13,7 @@
 #include "parse.h"
 
 static void	texture_error(char *label, char *suffix, char *detail,
-		t_parse_ctx *ctx)
+			t_parse_ctx *ctx)
 {
 	char	msg[64];
 
@@ -51,11 +51,18 @@ static void	check_texture_file(char *path, t_parse_ctx *ctx, char *label)
 		texture_error(label, " close failure: ", path, ctx);
 }
 
+static void	check_texture_syntax(char *line, char *label, t_parse_ctx *ctx)
+{
+	if (ft_strchr(line, '\t'))
+		texture_error(label, " line has invalid syntax", NULL, ctx);
+	if (*line != ' ')
+		texture_error(label, " line has invalid syntax", NULL, ctx);
+}
+
 t_state_parsing	parse_texture(char *line, char **store, t_parse_ctx *ctx,
 			char *label)
 {
-	while (*line && *line != ' ')
-		line++;
+	check_texture_syntax(line, label, ctx);
 	while (*line == ' ')
 		line++;
 	if (*store)

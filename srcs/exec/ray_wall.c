@@ -35,9 +35,9 @@ static void	select_texture_id(t_ray *r)
 	else
 	{
 		if (r->dir_y > 0.0)
-			r->tex = 0;
-		else
 			r->tex = 1;
+		else
+			r->tex = 0;
 	}
 }
 

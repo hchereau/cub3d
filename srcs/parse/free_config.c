@@ -44,6 +44,7 @@ void	free_config(t_config *cfg)
 	cfg->textures.south = NULL;
 	cfg->textures.east = NULL;
 	cfg->textures.west = NULL;
+	cfg->floor_set = 0;
+	cfg->ceiling_set = 0;
 	free_map_grid(&cfg->map);
 }
-

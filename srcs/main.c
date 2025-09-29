@@ -14,14 +14,19 @@
 #include "parse.h"
 #include "game.h"
 
+static int	print_usage(const char *prog)
+{
+	printf("Error\nUsage: %s <map_file.cub>\n", prog);
+	return (EXIT_FAILURE);
+}
+
 int	main(int argc, char **argv)
 {
 	t_config	cfg;
 
-	(void)argc;
 	ft_memset(&cfg, 0, sizeof(cfg));
-	if (!argv[1])
-		return (printf("Error\nNo file\n"), EXIT_FAILURE);
+	if (argc != 2)
+		return (print_usage(argv[0]));
 	parse_file(argv[1], &cfg);
 	printf("Loaded map %dx%d\n", cfg.map.width, cfg.map.height);
 	(void)exec_game(cfg);

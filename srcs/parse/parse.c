@@ -12,6 +12,22 @@
 
 #include "parse.h"
 
+static void	ensure_required_config(t_config *cfg, t_parse_ctx *ctx)
+{
+	if (!cfg->textures.north)
+		parse_error("Missing north texture", ctx);
+	if (!cfg->textures.south)
+		parse_error("Missing south texture", ctx);
+	if (!cfg->textures.west)
+		parse_error("Missing west texture", ctx);
+	if (!cfg->textures.east)
+		parse_error("Missing east texture", ctx);
+	if (!cfg->floor_set)
+		parse_error("Missing floor color", ctx);
+	if (!cfg->ceiling_set)
+		parse_error("Missing ceiling color", ctx);
+}
+
 static int	handle_line(char *line, t_config *cfg, t_parse_ctx *ctx)
 {
 	if (!ft_strncmp(line, "NO", 2))
@@ -27,9 +43,9 @@ static int	handle_line(char *line, t_config *cfg, t_parse_ctx *ctx)
 		return (parse_texture(line + 2, &cfg->textures.east,
 				ctx, "east texture"));
 	if (!ft_strncmp(line, "F", 1))
-		return (parse_color(line + 1, cfg, 1));
+		return (parse_color(line + 1, cfg, 1, ctx));
 	if (!ft_strncmp(line, "C", 1))
-		return (parse_color(line + 1, cfg, 0));
+		return (parse_color(line + 1, cfg, 0, ctx));
 	return (-1);
 }
 
@@ -62,6 +78,8 @@ void	parse_file(const char *file, t_config *cfg)
 
 	ctx.cfg = cfg;
 	ctx.lines = NULL;
+	cfg->floor_set = 0;
+	cfg->ceiling_set = 0;
 	data = file_to_string(file);
 	if (!data)
 		parse_error("File read error", &ctx);
@@ -71,6 +89,7 @@ void	parse_file(const char *file, t_config *cfg)
 		parse_error("Memory error", &ctx);
 	ctx.lines = lines;
 	map_start = parse_config(lines, cfg, &ctx);
+	ensure_required_config(cfg, &ctx);
 	if (parse_map(lines, map_start, cfg, &ctx) < 0)
 		parse_error("Map error", &ctx);
 	validate_map(cfg, &ctx);

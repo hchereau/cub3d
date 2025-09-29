@@ -49,6 +49,8 @@ typedef struct s_config
 	t_texture	textures;
 	t_color		floor_color;
 	t_color		ceiling_color;
+	int			floor_set;
+	int			ceiling_set;
 	t_map		map;
 	t_player	player;
 }	t_config;
