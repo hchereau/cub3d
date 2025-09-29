@@ -22,6 +22,7 @@
 
 # define EXIT_FAILURE 1
 # define BUFFER_SIZE_PARSING_CUBE 1024
+# define CUB_EXTENSION ".cub"
 
 typedef enum e_state_parsing
 {
@@ -43,6 +44,7 @@ void	parse_error_detail(const char *msg, const char *detail,
 int		is_empty_line(char *line);
 int		is_map_line(char *line);
 void	free_split(char **tab);
+int		has_cub_extension(const char *path);
 int		parse_color(char *line, t_config *cfg, int is_floor,
 			t_parse_ctx *ctx);
 int		parse_texture(char *line, char **store, t_parse_ctx *ctx,

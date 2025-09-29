@@ -28,6 +28,21 @@ static void	ensure_required_config(t_config *cfg, t_parse_ctx *ctx)
 		parse_error("Missing ceiling color", ctx);
 }
 
+static char	**load_lines(const char *file, t_parse_ctx *ctx)
+{
+	char	*data;
+	char	**lines;
+
+	data = file_to_string(file);
+	if (!data)
+		parse_error("File read error", ctx);
+	lines = ft_split(data, '\n');
+	free(data);
+	if (!lines)
+		parse_error("Memory error", ctx);
+	return (lines);
+}
+
 static int	handle_line(char *line, t_config *cfg, t_parse_ctx *ctx)
 {
 	if (!ft_strncmp(line, "NO", 2))
@@ -72,7 +87,6 @@ static int	parse_config(char **lines, t_config *cfg, t_parse_ctx *ctx)
 void	parse_file(const char *file, t_config *cfg)
 {
 	t_parse_ctx	ctx;
-	char		*data;
 	char		**lines;
 	int			map_start;
 
@@ -80,13 +94,9 @@ void	parse_file(const char *file, t_config *cfg)
 	ctx.lines = NULL;
 	cfg->floor_set = 0;
 	cfg->ceiling_set = 0;
-	data = file_to_string(file);
-	if (!data)
-		parse_error("File read error", &ctx);
-	lines = ft_split(data, '\n');
-	free(data);
-	if (!lines)
-		parse_error("Memory error", &ctx);
+	if (!has_cub_extension(file))
+		parse_error_detail("Invalid map extension: ", file, &ctx);
+	lines = load_lines(file, &ctx);
 	ctx.lines = lines;
 	map_start = parse_config(lines, cfg, &ctx);
 	ensure_required_config(cfg, &ctx);

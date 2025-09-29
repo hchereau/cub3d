@@ -62,3 +62,19 @@ void	free_split(char **tab)
 	}
 	free(tab);
 }
+
+int	has_cub_extension(const char *path)
+{
+	size_t	len;
+	size_t	ext_len;
+
+	if (!path)
+		return (0);
+	len = ft_strlen(path);
+	ext_len = ft_strlen(CUB_EXTENSION);
+	if (len < ext_len)
+		return (0);
+	if (!ft_strncmp(path + len - ext_len, CUB_EXTENSION, ext_len))
+		return (1);
+	return (0);
+}
