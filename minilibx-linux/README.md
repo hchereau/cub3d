@@ -22,7 +22,7 @@ Requirements for Linux
  - XShm extension must be present (package libxext-dev)
  - Utility functions from BSD systems - development files (package libbsd-dev)
  - **e.g. _sudo apt-get install gcc make xorg libxext-dev libbsd-dev_ (Debian/Ubuntu)**
-
+ 
 Requirements for MacOS
  - [Xquartz](https://www.xquartz.org/)
 
@@ -47,9 +47,9 @@ Compile MinilibX
 Install MinilibX
 
  - no installation script is provided. You may want to install
-	 - libmlx.a and/or libmlx_$(HOSTTYPE).a in /usr/X11/lib or /usr/local/lib
-	 - mlx.h in /usr/X11/include or /usr/local/include
-	 - man/man3/mlx*.1 in /usr/X11/man/man3 or /usr/local/man/man3
+     - libmlx.a and/or libmlx_$(HOSTTYPE).a in /usr/X11/lib or /usr/local/lib
+     - mlx.h in /usr/X11/include or /usr/local/include
+     - man/man3/mlx*.1 in /usr/X11/man/man3 or /usr/local/man/man3
 
 
  Olivier CROUZET - 2014-01-06 -
