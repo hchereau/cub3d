@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 16:07:53 by linux             #+#    #+#             */
-/*   Updated: 2025/09/26 20:30:20 by linux            ###   ########.fr       */
+/*   Updated: 2025/09/30 15:51:08 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@ int	is_empty_line(char *line)
 	size_t	i;
 
 	i = 0;
-	while (line && line[i])
-	{
-		if (line[i] != ' ' && line[i] != '\t')
-			return (0);
-		i++;
-	}
+	if (line && line[i])
+		return (0);
 	return (1);
 }
 

@@ -66,6 +66,17 @@ CC := clang
 CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
+CFLAGS += -pedantic
+CFLAGS += -O1
+CFLAGS += -fsanitize=address,undefined
+CFLAGS += -g3
+
+# ifeq ($(debug), true)
+# 	CFLAGS += -pedantic
+# 	CFLAGS += -O1
+# 	CFLAGS += -fsanitize=address,undefined
+# 	CFLAGS += -g3
+# endif
 
 ### LINKING ####################################################################
 

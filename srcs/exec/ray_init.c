@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linux <linux@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hucherea <hucherea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 15:52:55 by linux             #+#    #+#             */
-/*   Updated: 2025/09/15 15:52:57 by linux            ###   ########.fr       */
+/*   Updated: 2025/09/30 14:51:26 by hucherea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static void	compute_delta(t_ray *r)
 	if (r->dir_x != 0.0)
 		r->delta_x = fabs(1.0 / r->dir_x);
 	else
-		r->delta_x = 1e30;
+		r->delta_x = __INT_MAX__;
 	if (r->dir_y != 0.0)
 		r->delta_y = fabs(1.0 / r->dir_y);
 	else
-		r->delta_y = 1e30;
+		r->delta_y = __INT_MAX__;
 }
 
 static void	compute_steps_and_sides(t_game *g, t_ray *r)
